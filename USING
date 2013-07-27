@@ -1,0 +1,15 @@
+The examples can be run without installing anything
+
+PYTHONPATH=. examples/artnet-discovery.py
+
+If you don't have libartnet installed in a default library path,
+specify the location with LD_LIBRARY_PATH
+
+LD_LIBRARY_PATH=/path/to/dir/with/libartnet PYTHONPATH=. \
+	examples/artnet-discovery.py
+
+examples/artnet-setdmx.py sends one DMX512 universe frame, it
+takes multiple channel, value pairs on the command line.
+
+For example, to set channel 1 to 50 and channel 2 to 60
+ examples/artnet-setdmx.py 1 50 2 60
