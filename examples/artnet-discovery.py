@@ -15,6 +15,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
+from __future__ import print_function
+
 from artnet import ArtnetController
 from select import select
 from optparse import OptionParser
@@ -35,8 +37,7 @@ while (time() - start) < int(opts.timeout):
 		ac.run()
 
 for node in ac.nodes():
-	print "IP: " + node.ip + " (" + node.mac + ")"
-	print "Name: " + node.name,
-	print ", version: " + str(node.version)
-	print "Subnet: " + str(node.subnet)
-	print "Ports: " + str(node.ports)
+	print("IP: " + node.ip + " (" + node.mac + ")")
+	print("Name: " + str(node.name) + ", version: " + str(node.version))
+	print("Subnet: " + str(node.subnet))
+	print("Ports: " + str(node.ports))

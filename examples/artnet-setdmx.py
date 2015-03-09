@@ -15,6 +15,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
+from __future__ import print_function
+
 from artnet import ArtnetController, DmxPort
 from select import select
 from optparse import OptionParser
@@ -36,9 +38,9 @@ ac = ArtnetController("pyartnet-setdmx")
 dp = DmxPort(opts.port, DmxPort.INPUT)
 ac.add_port(dp)
 
-print "Using port", dp
+print("Using port {}".format(dp))
 
 for channel, value in pairwise(args):
     dp.set(int(channel), int(value))
-    print "Channel", channel, "set to", value
+    print("Channel " + channel + ", set to " + value)
 dp.send()
