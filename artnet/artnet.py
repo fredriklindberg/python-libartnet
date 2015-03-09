@@ -191,4 +191,4 @@ class ArtnetController(Artnet):
         self.send_poll()
 
     def run(self):
-		self.read()
+        self.read()
