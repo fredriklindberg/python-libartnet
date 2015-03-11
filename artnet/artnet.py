@@ -17,9 +17,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
 from ctypes import *
-from node import *
-from port import *
-from dmx import *
+from .node import *
+from .port import *
+from .dmx import *
 from . import _an
 
 class Artnet(object):
