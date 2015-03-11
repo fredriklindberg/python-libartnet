@@ -96,6 +96,9 @@ class Nodes(object):
         return self
 
     def next(self):
+        return self.__next__()
+
+    def __next__(self):
         if self._entry == 0:
             self._entry = _an.artnet_nl_first(self._nl)
         else:
