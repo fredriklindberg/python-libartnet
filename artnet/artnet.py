@@ -18,8 +18,7 @@
 
 from ctypes import *
 from .node import *
-from .port import *
-from .dmx import *
+from . import port
 from . import _an
 
 class Artnet(object):
@@ -141,30 +140,30 @@ class Artnet(object):
         return Nodes(self._node)
 
     _port_cfg = {
-        Port.INPUT   : 0x40,
-        Port.OUTPUT  : 0x80,
-        Port.DMX     : 0x00,
-        Port.MIDI    : 0x01,
-        Port.AVAB    : 0x02,
-        Port.CMX     : 0x03,
-        Port.ADB     : 0x04,
-        Port.ARTNET  : 0x05
+        port.Port.INPUT   : 0x40,
+        port.Port.OUTPUT  : 0x80,
+        port.Port.DMX     : 0x00,
+        port.Port.MIDI    : 0x01,
+        port.Port.AVAB    : 0x02,
+        port.Port.CMX     : 0x03,
+        port.Port.ADB     : 0x04,
+        port.Port.ARTNET  : 0x05
     }
 
-    def add_port(self, port):
+    def add_port(self, prt):
         id = self._num_ports
         self._num_ports = self._num_ports + 1
 
         _an.artnet_set_port_type(self._node, id, \
-            self._port_cfg[port.direction], \
-            self._port_cfg[port.data_type])
+            self._port_cfg[prt.direction], \
+            self._port_cfg[prt.data_type])
 
-        dir = 1 if port.direction == Port.INPUT else 2
+        dir = 1 if prt.direction == port.Port.INPUT else 2
         _an.artnet_set_port_addr(self._node, id, dir, \
-            port.address)
+            prt.address)
 
-        self._ports.append(port)
-        port.set_context(self)
+        self._ports.append(prt)
+        prt.set_context(self)
         return id
 
     def ports(self):

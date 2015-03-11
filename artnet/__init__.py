@@ -23,4 +23,5 @@ try:
 except:
     raise OSError("Unable to load libartnet.so")
 
+from . import port
 from .artnet import *

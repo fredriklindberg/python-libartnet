@@ -17,7 +17,7 @@
 
 from __future__ import print_function
 
-from artnet import ArtnetController, DmxPort
+from artnet import ArtnetController, port
 from select import select
 from optparse import OptionParser
 
@@ -34,7 +34,7 @@ if len(args) % 2:
     parser.error("Channel and values should be specified in pairs")
 
 ac = ArtnetController("pyartnet-setdmx")
-dp = DmxPort(opts.port, DmxPort.INPUT)
+dp = port.Dmx(opts.port, port.Dmx.INPUT)
 ac.add_port(dp)
 
 print("Using port {}".format(dp))

@@ -17,12 +17,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 from ctypes import create_string_buffer
-from .port import *
-from . import _an
+from .port import Port
+from .. import _an
 
-class DmxPort(Port):
+class Dmx(Port):
     def __init__(self, address = 0, direction = Port.INPUT):
-        super(DmxPort, self).__init__(address, direction)
+        super(Dmx, self).__init__(address, direction)
         self._data_type = Port.DMX
         self.reset()
 
