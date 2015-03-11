@@ -21,6 +21,6 @@ import ctypes as c
 try:
     _an = c.CDLL("libartnet.so")
 except:
-    raise OSError, "Unable to load libartnet.so"
+    raise OSError("Unable to load libartnet.so")
 
 from artnet import *
