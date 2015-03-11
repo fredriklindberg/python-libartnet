@@ -20,11 +20,10 @@ from __future__ import print_function
 from artnet import ArtnetController, DmxPort
 from select import select
 from optparse import OptionParser
-from itertools import izip
 
 def pairwise(iterable):
     a = iter(iterable)
-    return izip(a, a)
+    return zip(a, a)
 
 parser = OptionParser(usage="%prog [options] channel value [channel value [...]]")
 parser.add_option("-p", "--port", dest="port", default=0,
