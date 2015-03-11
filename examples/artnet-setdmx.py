@@ -34,7 +34,7 @@ if len(args) % 2:
     parser.error("Channel and values should be specified in pairs")
 
 ac = ArtnetController("pyartnet-setdmx")
-dp = port.Dmx(opts.port, port.Dmx.INPUT)
+dp = port.DMX(opts.port, port.DMX.INPUT)
 ac.add_port(dp)
 
 print("Using port {}".format(dp))

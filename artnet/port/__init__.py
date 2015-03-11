@@ -1,2 +1,2 @@
 from .port import Port
-from .dmx import Dmx
+from .dmx import DMX

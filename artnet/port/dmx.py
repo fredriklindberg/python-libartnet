@@ -20,9 +20,9 @@ from ctypes import create_string_buffer
 from .port import Port
 from .. import _an
 
-class Dmx(Port):
+class DMX(Port):
     def __init__(self, address = 0, direction = Port.INPUT):
-        super(Dmx, self).__init__(address, direction)
+        super(DMX, self).__init__(address, direction)
         self._data_type = Port.DMX
         self.reset()
 
