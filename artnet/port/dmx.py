@@ -30,7 +30,7 @@ class DMX(Port):
         self._channels = create_string_buffer(512)
 
     def set(self, channel, value):
-        self._channels[channel - 1] = chr(value)
+        self._channels[channel - 1] = int(value)
 
     @property
     def channels(self):
