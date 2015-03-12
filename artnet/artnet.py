@@ -27,6 +27,9 @@ class Artnet(object):
     _num_ports = 0
 
     def __init__(self, type=SRV, ip=None):
+        if not libartnet:
+            raise OSError("Unable to load libartnet.so")
+
         self._ip = ip
         self._node = libartnet.artnet_new(ip, 0)
         self.type = type

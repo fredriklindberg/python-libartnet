@@ -21,4 +21,4 @@ from ctypes import CDLL
 try:
     libartnet = CDLL("libartnet.so")
 except:
-    raise OSError("Unable to load libartnet.so")
+    libartnet = None
