@@ -17,7 +17,7 @@
 
 from __future__ import print_function
 
-from artnet import Controller
+import artnet
 from select import select
 from optparse import OptionParser
 from time import time
@@ -27,7 +27,7 @@ parser.add_option("-t", dest="timeout", default=3,
                   help="Discovery timeout")
 (opts, args) = parser.parse_args()
 
-ac = Controller("pyartnet-discover")
+ac = artnet.Controller("pyartnet-discover")
 ac.discover()
 
 start = time()
