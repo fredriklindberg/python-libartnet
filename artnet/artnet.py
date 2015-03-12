@@ -18,7 +18,6 @@
 
 from ctypes import *
 from .node import *
-from . import port
 from . import _an
 
 class Artnet(object):
@@ -139,27 +138,22 @@ class Artnet(object):
     def nodes(self):
         return Nodes(self._node)
 
-    _port_cfg = {
-        port.Port.INPUT   : 0x40,
-        port.Port.OUTPUT  : 0x80,
-        port.Port.DMX     : 0x00,
-        port.Port.MIDI    : 0x01,
-        port.Port.AVAB    : 0x02,
-        port.Port.CMX     : 0x03,
-        port.Port.ADB     : 0x04,
-        port.Port.ARTNET  : 0x05
-    }
+    INPUT_PORT = 1
+    OUTPUT_PORT = 2
 
     def add_port(self, prt):
         id = self._num_ports
         self._num_ports = self._num_ports + 1
 
         _an.artnet_set_port_type(self._node, id, \
-            self._port_cfg[prt.direction], \
-            self._port_cfg[prt.data_type])
+            prt.artnet_direction, prt.artnet_data_type)
 
-        dir = 1 if prt.direction == port.Port.INPUT else 2
-        _an.artnet_set_port_addr(self._node, id, dir, \
+        if prt.direction == prt.INPUT:
+            direction = self.INPUT_PORT
+        else:
+            direction = self.OUTPUT_PORT
+
+        _an.artnet_set_port_addr(self._node, id, direction, \
             prt.address)
 
         self._ports.append(prt)

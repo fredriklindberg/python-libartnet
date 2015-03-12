@@ -27,6 +27,17 @@ class Port(object):
     ADB     = "ADB"
     ARTNET  = "ARTNET"
 
+    _port_types = {
+        INPUT   : 0x40,
+        OUTPUT  : 0x80,
+        DMX     : 0x00,
+        MIDI    : 0x01,
+        AVAB    : 0x02,
+        CMX     : 0x03,
+        ADB     : 0x04,
+        ARTNET  : 0x05
+    }
+
     _id = None
     _data_type = None
     _artnet = None
@@ -61,8 +72,16 @@ class Port(object):
         return self._direction
 
     @property
+    def artnet_direction(self):
+        return self._port_types[self._direction]
+
+    @property
     def data_type(self):
         return self._data_type
+
+    @property
+    def artnet_data_type(self):
+        return self._port_types[self._data_type]
 
     @property
     def data(self):
