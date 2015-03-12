@@ -18,7 +18,7 @@
 
 from ctypes import *
 from .node import *
-from . import _an
+from .libartnet import libartnet
 
 class Artnet(object):
 
@@ -28,7 +28,7 @@ class Artnet(object):
 
     def __init__(self, type=SRV, ip=None):
         self._ip = ip
-        self._node = _an.artnet_new(ip, 0)
+        self._node = libartnet.artnet_new(ip, 0)
         self.type = type
         self.subnet = 0
         self._CHANDLER = \
@@ -38,30 +38,30 @@ class Artnet(object):
 
     def __del__(self):
         if self._node != None:
-            _an.artnet_destroy(self._node)
+            libartnet.artnet_destroy(self._node)
 
     @property
     def handle(self):
         return self._node
 
     def start(self):
-        ret = _an.artnet_start(self._node)
+        ret = libartnet.artnet_start(self._node)
 
     def stop(self):
-        ret = _an.artnet_stop(self._node)
+        ret = libartnet.artnet_stop(self._node)
 
     def read(self, timeout=0):
-        ret = _an.artnet_read(self._node, timeout)
+        ret = libartnet.artnet_read(self._node, timeout)
 
     def fileno(self):
-        return _an.artnet_get_sd(self._node)
+        return libartnet.artnet_get_sd(self._node)
 
     TTM_DEFAULT = 0xFF
     TTM_PRIVATE = 0xFE
     TTM_AUTO = 0xFD
 
     def send_poll(self, ip=None, ttm=TTM_DEFAULT):
-        return _an.artnet_send_poll(self._node, ip, ttm)
+        return libartnet.artnet_send_poll(self._node, ip, ttm)
 
     @property
     def ip(self):
@@ -73,7 +73,7 @@ class Artnet(object):
     @type.setter
     def type(self, value):
         self._type = value
-        _an.artnet_set_node_type(self._node, value)
+        libartnet.artnet_set_node_type(self._node, value)
 
     @property
     def name(self):
@@ -81,7 +81,7 @@ class Artnet(object):
     @name.setter
     def name(self, value):
         self._name = value
-        _an.artnet_set_short_name(self._node, value)
+        libartnet.artnet_set_short_name(self._node, value)
 
     @property
     def long_name(self):
@@ -89,7 +89,7 @@ class Artnet(object):
     @long_name.setter
     def long_name(self, value):
         self._name = value
-        _an.artnet_set_long_name(self._node, value)
+        libartnet.artnet_set_long_name(self._node, value)
 
     @property
     def broadcast_limit(self):
@@ -97,7 +97,7 @@ class Artnet(object):
     @broadcast_limit.setter
     def broadcast_limit(self, value):
         self._bcast_limit = value
-        _an.artnet_set_bcast_limit(self._node, value)
+        libartnet.artnet_set_bcast_limit(self._node, value)
 
     @property
     def subnet(self):
@@ -105,7 +105,7 @@ class Artnet(object):
     @broadcast_limit.setter
     def subnet(self, value):
         self._subnet = value
-        _an.artnet_set_subnet_addr(self._node, value)
+        libartnet.artnet_set_subnet_addr(self._node, value)
 
     HANDLER_RECV = 0
     HANDLER_SEND = 1
@@ -133,7 +133,7 @@ class Artnet(object):
             'data' : data,
             'ccb' : ccb
         }
-        _an.artnet_set_handler(self._node, handler, ccb, handler)
+        libartnet.artnet_set_handler(self._node, handler, ccb, handler)
 
     def nodes(self):
         return Nodes(self._node)
@@ -145,7 +145,7 @@ class Artnet(object):
         id = self._num_ports
         self._num_ports = self._num_ports + 1
 
-        _an.artnet_set_port_type(self._node, id, \
+        libartnet.artnet_set_port_type(self._node, id, \
             prt.artnet_direction, prt.artnet_data_type)
 
         if prt.direction == prt.INPUT:
@@ -153,7 +153,7 @@ class Artnet(object):
         else:
             direction = self.OUTPUT_PORT
 
-        _an.artnet_set_port_addr(self._node, id, direction, \
+        libartnet.artnet_set_port_addr(self._node, id, direction, \
             prt.address)
 
         self._ports.append(prt)
@@ -177,7 +177,7 @@ class Controller(Artnet):
         return 0
 
     def _handler_poll(self, artnet, data):
-        _an.artnet_send_poll_reply(self._node)
+        libartnet.artnet_send_poll_reply(self._node)
         return 0
 
     def discover(self):

@@ -19,7 +19,7 @@
 from ctypes import *
 from socket import inet_ntoa
 import struct
-from . import _an
+from .libartnet import libartnet
 
 class Node(object):
     def __init__(self, ne):
@@ -86,10 +86,10 @@ class NodeEntry(Structure):
 class Nodes(object):
     def __init__(self, artnet):
         self._artnet = artnet
-        self._nl = _an.artnet_get_nl(artnet)
+        self._nl = libartnet.artnet_get_nl(artnet)
 
     def __len__(self):
-        return _an.artnet_nl_get_length(self._nl)
+        return libartnet.artnet_nl_get_length(self._nl)
 
     def __iter__(self):
         self._entry = 0
@@ -100,9 +100,9 @@ class Nodes(object):
 
     def __next__(self):
         if self._entry == 0:
-            self._entry = _an.artnet_nl_first(self._nl)
+            self._entry = libartnet.artnet_nl_first(self._nl)
         else:
-            self._entry = _an.artnet_nl_next(self._nl)
+            self._entry = libartnet.artnet_nl_next(self._nl)
 
         if self._entry != 0:
             c_ne_p = POINTER(NodeEntry)

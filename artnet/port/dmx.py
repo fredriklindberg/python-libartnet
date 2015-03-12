@@ -18,7 +18,7 @@
 
 from ctypes import create_string_buffer
 from .port import Port
-from .. import _an
+from ..libartnet import libartnet
 
 class DMX(Port):
     def __init__(self, address = 0, direction = Port.INPUT):
@@ -42,5 +42,5 @@ class DMX(Port):
 
     def send(self):
         data = self.data
-        _an.artnet_send_dmx(self._artnet.handle, \
+        libartnet.artnet_send_dmx(self._artnet.handle, \
             self._id, len(data), data)
