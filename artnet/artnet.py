@@ -169,10 +169,10 @@ class Artnet(object):
     def ports(self):
         return filter(lambda x: x != None, self._ports)
 
-class ArtnetController(Artnet):
+class Controller(Artnet):
 
     def __init__(self, name = 'py-artnet', long_name = ''):
-        super(ArtnetController, self).__init__(Artnet.SRV)
+        super(Controller, self).__init__(Artnet.SRV)
         self.name = name
         self.long_name = long_name
         self.set_handler(self.HANDLER_POLL, self._handler_poll)

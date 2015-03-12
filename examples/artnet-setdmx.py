@@ -17,7 +17,7 @@
 
 from __future__ import print_function
 
-from artnet import ArtnetController, port
+from artnet import Controller, port
 from select import select
 from optparse import OptionParser
 
@@ -33,7 +33,7 @@ parser.add_option("-p", "--port", dest="port", default=0,
 if len(args) % 2:
     parser.error("Channel and values should be specified in pairs")
 
-ac = ArtnetController("pyartnet-setdmx")
+ac = Controller("pyartnet-setdmx")
 dp = port.DMX(opts.port, port.DMX.INPUT)
 ac.add_port(dp)
 
