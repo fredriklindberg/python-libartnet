@@ -6,7 +6,7 @@ libartnet (http://www.opendmx.net/index.php/Libartnet)
 Only bindings for node discovery and DMX512 tranmission
 are currently implemented.
 
-Copyright (C) 2013 Fredrik Lindberg <fli@shapeshifter.se>
+Copyright (C) 2013-2015 Fredrik Lindberg <fli@shapeshifter.se>
 
 python-libartnet comes with ABSOLUTELY NO WARRANTY. This is free software,
 and you are welcome to redistribute it under certain conditions;
