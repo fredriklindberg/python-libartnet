@@ -1,3 +1,15 @@
+Installing
+=================================================================
+
+Installing bindings from source
+> python setup.py install
+
+libartnet needs to be installed on the system for the bindings
+to work. http://www.opendmx.net/index.php/Libartnet
+
+Test without installing
+=================================================================
+
 The examples can be run without installing anything
 
 PYTHONPATH=. examples/artnet-discovery.py
